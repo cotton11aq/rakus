@@ -1,0 +1,20 @@
+body {
+  display: flex;
+}
+
+td > div {
+  display: flex;
+}
+
+td div div {
+  margin: auto;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  display: inline-block;
+  margin-top: 20px;
+}

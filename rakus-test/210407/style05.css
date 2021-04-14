@@ -1,0 +1,43 @@
+body {
+  height: 800px;
+  width: 800px;
+  display: grid;
+  grid-template:
+    'header header header header header' 10%
+    '.....  .....  .....  .....  ..... ' 1%
+    'nav    .....   main  .....  aside ' 78%
+    '..... .....   .....  .....  ..... ' 1%
+    'footer footer footer footer footer' 10%
+    /10% 1% 78% 1% 10%;
+}
+
+header {
+  grid-area: header;
+}
+
+main {
+  grid-area: main;
+}
+
+nav {
+  grid-area: nav;
+}
+
+aside {
+  grid-area: aside;
+}
+
+footer {
+  grid-area: footer;
+}
+
+header,
+main,
+nav,
+aside,
+footer {
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

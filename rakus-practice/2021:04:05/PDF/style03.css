@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+}
+
+div {
+  display: flex;
+}
+
+div .snav {
+  order: 1;
+}

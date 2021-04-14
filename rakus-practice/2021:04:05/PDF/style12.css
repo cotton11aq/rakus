@@ -1,0 +1,68 @@
+/* gridの場合 */
+/* 
+/* body {
+  width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template:
+    "header header" 80px
+    "side   main" 500px
+    "footer footer" 60px
+    /280px 620px;
+    
+}
+
+header {
+  grid-area: header;
+  background-color: pink;
+}
+
+main {
+  grid-area: main;
+  background-color: skyblue;
+}
+
+nav {
+  grid-area: side;
+  background-color: green;
+}
+
+footer {
+  grid-area: footer;
+  background-color: yellow;
+} */
+
+/* flexの場合 */
+body {
+  margin: 0 auto;
+  width: 900px;
+}
+
+header {
+  width: 900px;
+  height: 80px;
+  background-color: pink;
+}
+
+div {
+  display: flex;
+}
+
+main {
+  width: 620px;
+  height: 500px;
+  order: -1;
+  background-color: skyblue;
+}
+
+nav {
+  width: 280px;
+  height: 500px;
+  background-color: green;
+}
+
+footer {
+  width: 900px;
+  height: 60px;
+  background-color: yellow;
+}

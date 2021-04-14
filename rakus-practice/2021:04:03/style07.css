@@ -1,0 +1,11 @@
+body {
+  display: flex;
+}
+
+td > div {
+  display: flex;
+}
+
+td div div {
+  margin: auto;
+}
