@@ -10,10 +10,20 @@
   </head>
   <body>
     <div id="app">
-      <a v-bind:href="url">Google</a>
-      <p :class="{class2:flag}">{{ message }}</p>
-      <p :title="message">{{ message }}</p>
+      <p :class="{red:flag}">{{ message }}</p>
+      <p :class="a">{{ message }}</p>
       <p :class="[a,b]">{{ message }}</p>
+      <input type="text" @change="Change" />
+      <p>{{ message }}</p>
+      <input type="submit" @click="Alert" />
+      <a href="javascript:alert('href action')" @click.prevent="Alert"
+        >prevent設定</a
+      >
+      <div>
+        <button @click="log">現在時刻を取得する</button>
+        <p>現在時刻は{{ time }}</p>
+      </div>
+      <div @click="countUp()">$イベント</div>
     </div>
     <script src="main.js"></script>
   </body>
