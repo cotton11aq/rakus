@@ -13,8 +13,7 @@
       <h1>チュートリアルToDoリスト</h1>
       <!-- 絞り込みラジオボタン -->
       <label v-for="label in options">
-        <input type="radio" v-model="current" :value="label.value" />{{
-        label.label }}
+        <input type="radio" v-model="current" :value="label.value" />{{ label.label }}
       </label>
 
       <!-- ToDoテーブル -->
