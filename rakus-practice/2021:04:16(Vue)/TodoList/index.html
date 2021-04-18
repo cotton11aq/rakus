@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Vue.js App</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- 絞り込みラジオボタン -->
+      <!-- ToDo テーブル -->
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>コメント</th>
+            <th>状態</th>
+            <th>-</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in items" v-bind:key="item.id">
+            <td>{{item.id}}</td>
+            <td>{{item.comment}}</td>
+            <td>{{item.state}}</td>
+            <td><button>削除</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- 新規登録フォーム -->
+      <input type="text" ref="comment" />
+      <button>追加</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

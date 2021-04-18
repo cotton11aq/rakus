@@ -13,9 +13,9 @@
       <h1>チュートリアルToDoリスト</h1>
       <!-- 絞り込みラジオボタン -->
       <label v-for="label in options">
-        <input type="radio" v-model="current" :value="label.value" />{{ label.label }}
+        <input type="radio" v-model="current" :value="label.value" />{{
+        label.label }}
       </label>
-
       <!-- ToDoテーブル -->
       <table>
         <thead v-pre>
@@ -49,7 +49,6 @@
         <button type="submit">追加</button>
       </form>
     </div>
-
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script
