@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <form action="">
+        <p><input type="text" v-model="text" />{{ text }}</p>
+        <p><input type="checkbox" v-model="check" />{{ check }}</p>
+        <p>
+          <input
+            type="radio"
+            name="gender"
+            value="man"
+            v-model="radio"
+          />男<input
+            type="radio"
+            name="gender"
+            value="woman"
+            v-model="radio"
+          />女
+          <p>{{ radio }}</p>
+        </p>
+        <p><select v-model="select" name="year" id=""><option value="2020">2020</option>
+        <option value="2021">2021</option></select>
+      {{ select }}</p>
+      </form>
+
+      {{ $data }}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
