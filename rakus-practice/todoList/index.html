@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- todoList -->
     <div id="app">
       <h1>チュートリアルToDoリスト</h1>
       <!-- 絞り込みラジオボタン -->
@@ -17,6 +16,63 @@
         label.label }}
       </label>
       <!-- ToDoテーブル -->
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>コメント</th>
+            <th>状態</th>
+            <th>-</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in computedTodos" v-bind:key="item.id">
+            <th>{{ item.id + 1 }}</th>
+            <td>{{ item.message }}</td>
+            <td>
+              <button @click="changeState(item)">
+                {{ labels[item.state] }}
+              </button>
+            </td>
+            <td><button @click="delate(item)">削除</button></td>
+          </tr>
+          <tr></tr>
+        </tbody>
+      </table>
+      <!-- 新規登録フォーム -->
+      <h2>新しい作業の追加</h2>
+      コメント
+      <form action="" @submit.prevent="add">
+        <input type="text" ref="comment" />
+        <button type="submit">追加</button>
+      </form>
+    </div>
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
+
+<!-- 
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    todoList
+    <div id="app">
+      <h1>チュートリアルToDoリスト</h1>
+      絞り込みラジオボタン
+      <label v-for="label in options">
+        <input type="radio" v-model="current" :value="label.value" />{{
+        label.label }}
+      </label>
+      ToDoテーブル
       <table>
         <thead v-pre>
           <tr>
@@ -42,14 +98,14 @@
           <tr></tr>
         </tbody>
       </table>
-      <!-- 新規登録フォーム -->
+      新規登録フォーム
       <h2>新しい作業の追加</h2>
       <form action="" @submit.prevent="doAdd">
         コメント <input type="text" ref="comment" />
         <button type="submit">追加</button>
       </form>
     </div>
-    <!-- JavaScript -->
+    JavaScript
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script
       src="local.js"
@@ -58,4 +114,4 @@
     ></script>
     <script src="main.js"></script>
   </body>
-</html>
+</html> -->

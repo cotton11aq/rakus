@@ -1,4 +1,4 @@
-
+/* app全体 */
 * {
   box-sizing: border-box;
 }
@@ -6,13 +6,14 @@
   max-width: 640px;
   margin: 0 auto;
 }
+/*テーブルタグに対して勝手にやってくれる */
 table {
   width: 100%;
   border-collapse: collapse;
 }
 thead th {
-  border-bottom: 2px solid #0099e4; /*#d31c4a */
-  color: #0099e4;
+  border-bottom: 2px solid #e44800; /*#d31c4a */
+  color: #e44800;
 }
 th,
 th {
@@ -28,7 +29,8 @@ thead th.state {
 thead th.button {
   width: 60px;
 }
-tbody td.button, tbody td.state {
+tbody td.button,
+tbody td.state {
   text-align: center;
 }
 tbody tr td,
@@ -45,12 +47,13 @@ tbody tr:hover td,
 tbody tr:hover th {
   background: #f4fbff;
 }
+/* 登録ボタン */
 button {
   border: none;
   border-radius: 20px;
   line-height: 24px;
   padding: 0 8px;
-  background: #0099e4;
+  background: #e44800;
   color: #fff;
   cursor: pointer;
 }

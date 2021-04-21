@@ -1,46 +1,84 @@
 const UserDetailChild = {
-  props: {
-    // joho: { type: Object },
-    userId: { type: Number },
-    userName: { type: String },
-    userAddress: { type: String },
-  },
-
   template: `
   <div>
     <p>UserDetailの子供です</p>
-    {{ userId }}
-    {{ userName }}
-    {{ userAddress }}
+    <ul>
+      <li v-for="joho in userJoho">
+        {{ joho.id }} {{ joho.name }} {{ joho.address }}
+      </li>
+    </ul>
+    <div>情報変更フォーム</div>
+    <button @click="update">情報変更</button>
+    Id<input type="text" v-model="DetailChildId">    
+    Name<input type="text" v-model="DetailChildName">    
+    Address<input type="text" v-model="DetailChildAddress">    
   </div>
   `,
+  props: {
+    userInfo: { type: Object },
+    userJoho: { type: Array },
+  },
+  data() {
+    return {
+      DetailChildId: '',
+      DetailChildName: '',
+      DetailChildAddress: '',
+    };
+  },
+
+  methods: {
+    update() {
+      this.$emit('DetailChildIdEvent', this.DetailChildId);
+      this.$emit('DetailChildNameEvent', this.DetailChildName);
+      this.$emit('DetailChildAddressEvent', this.DetailChildAddress);
+    },
+  },
 };
 
-// 3
 const UserDetail = {
   components: {
     'user-detail-child': UserDetailChild,
-  },
-
-  props: {
-    user: { type: Object },
-    userId: { type: Number },
-    userName: { type: String },
-    userAddress: { type: String },
   },
   template: `
   <div>
   <h2>選択中のユーザー</h2>
   <input v-model="user.name">
-  <user-detail-child :user-id = 'userId' :user-name = 'userName' :user-address = 'userAddress'></user-detail-child>
+  <user-detail-child :user-joho = 'userJoho' :user-info = 'user' @DetailChildIdEvent='DetailIdEvent' @DetailChildNameEvent='DetailNameEvent' @DetailChildAddressEvent='DetailAddressEvent'></user-detail-child>
   </div>`,
+  // 3
+  props: {
+    user: { type: Object },
+    userName: { type: String },
+    userJoho: { type: Array },
+  },
+  data() {
+    return {
+      DetailId: '',
+      DetailName: '',
+      DetailAddress: '',
+    };
+  },
+  methods: {
+    DetailIdEvent(payload) {
+      this.DetailId = payload;
+      this.$emit('DetailIdEvent', this.DetailId);
+    },
+    DetailNameEvent(payload) {
+      this.DetailName = payload;
+      this.$emit('DetailNameEvent', this.DetailName);
+    },
+    DetailAddressEvent(payload) {
+      this.DetailAddress = payload;
+      this.$emit('DetailAddressEvent', this.DetailAddress);
+    },
+  },
 };
 
-// 2
 const ListTitle = {
+  // 2
   template: `
   <div>
-    <h2>ユーザーリスト</h2>
+  <h2>ユーザーリスト</h2>
   </div>`,
 };
 
@@ -62,16 +100,26 @@ const UserList = {
       selected_user: {},
     };
   },
+  methods: {
+    idEvent(payload) {
+      this.users[payload.id - 1].id = payload.id;
+    },
+    nameEvent(payload) {
+      this.users[payload.id - 1].name = payload.name;
+    },
+    addressEvent(payload) {
+      this.users[payload.id - 1].address = payload.address;
+    },
+  },
   template: `
   <div>
     <list-title></list-title>
     <ul>
       <li v-for="user in users" :key="user.id" @click='selected_user = user'>
-        {{ user.name }}
+      {{ user.name }}
       </li>
     </ul>
-    <user-detail :user = 'selected_user' 
-    :user-id='selected_user.id' :user-name='selected_user.name' :user-address = 'selected_user.address'></user-detail>
+    <user-detail :user = 'selected_user' :user-name='selected_user.name' :user-joho = 'users' @DetailIdEvent = 'idEvent' @DetailNameEvent = 'nameEvent' @DetailAddressEvent = 'addressEvent'></user-detail>
   </div>`,
 };
 
