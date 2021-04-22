@@ -27,16 +27,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   name: 'Card',
-  computed: {
-    items() {
-      return this.$store.state.items;
-    },
-    selectItems() {
-      return this.$store.state.selectItems;
-    },
-  },
+  computed:
+    //mapStateヘルパー利用
+    mapState(['items', 'selectItems']),
+
+  // items() {
+  //   return this.$store.state.items;
+  // },
+  // selectItems() {
+  //   return this.$store.state.selectItems;
+  // },
 };
 </script>
 
