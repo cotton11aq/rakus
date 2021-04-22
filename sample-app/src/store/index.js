@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    comment: '',
+    message: '',
     selectItems: [],
     items: [
       {
@@ -16,7 +16,7 @@ export default new Vuex.Store({
           l: 'M700',
         },
         url:
-          'https://product.starbucks.co.jp/asset/202104211014-00c398/resource/products/images/4524785457607_1_l.jpg?ver=20210421',
+          'https://product.starbucks.co.jp/asset/202104220534-216108/resource/products/images/4524785457607_11_s.jpg',
       },
       {
         id: 0,
@@ -26,7 +26,7 @@ export default new Vuex.Store({
           l: 'M700',
         },
         url:
-          'https://product.starbucks.co.jp/asset/202104211014-00c398/resource/products/images/4524785457607_1_l.jpg?ver=20210421',
+          'https://product.starbucks.co.jp/asset/202104220534-216108/resource/products/images/4524785457607_11_s.jpg',
       },
       {
         id: 1,
@@ -36,23 +36,31 @@ export default new Vuex.Store({
           l: 'M700',
         },
         url:
-          'https://product.starbucks.co.jp/asset/202104211014-00c398/resource/products/images/4524785461314_1_l.jpg?ver=20210421',
+          'https://product.starbucks.co.jp/asset/202104220534-216108/resource/products/images/4524785461314_11_s.jpg',
       },
     ],
   },
   mutations: {
-    updateMessage(state, message) {
-      state.comment = message;
+    updateMessage(state, value) {
+      state.message = value;
     },
     search(state) {
       state.selectItems = [];
-      for (let i = 0; i < state.items.length; i++) {
-        if (state.comment === state.item[i].name) {
-          state.selectItems.push(state.items[i]);
+      for (let i in state.items) {
+        let item = state.items[i];
+        if (state.message === '') {
+          return;
+        } else if (item.name.indexOf(state.message) !== -1) {
+          state.selectItems.push(item);
+          // 値が見つからない場合は -1 を返す
         }
       }
     },
   },
-  actions: {},
+  actions: {
+    searchAction(context) {
+      context.commit('search');
+    },
+  },
   modules: {},
 });
