@@ -8,11 +8,11 @@
     <!-- <v-main> -->
     <SideNav />
     <!-- </v-main> -->
-    <v-content>
+    <v-main>
       <v-container fluid fill-height align-start>
         <router-view />
       </v-container>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 

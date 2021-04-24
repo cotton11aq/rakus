@@ -1,6 +1,6 @@
 <template>
-  <v-container fluid fill-height>
-    <v-btn color="pink" dark @click.stop="toggleSideMenu">Toggle</v-btn>
+  <div fluid fill-height>
+    <v-btn color="pink" dark @click.stop="drawer = !drawer">Toggle</v-btn>
     <v-navigation-drawer v-model="$store.state.drawer" absolute temporary>
       <v-list>
         <v-list-item>
@@ -26,10 +26,10 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-  </v-container>
+  </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
+// import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -42,8 +42,8 @@ export default {
       ],
     };
   },
-  methods: {
-    ...mapActions(['toggleSideMenu']),
-  },
+  // methods: {
+  //   ...mapActions(['toggleSideMenu']),
+  // },
 };
 </script>

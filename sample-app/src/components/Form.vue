@@ -20,16 +20,13 @@ export default {
       },
       set(value) {
         // 値の変更
-        this.$store.commit('updateMessage', value);
+        this.$store.dispatch('updateMessage', value);
       },
     },
   },
   methods: {
-    // search() {
-    //   this.$store.commit('search');
-    // },
     search() {
-      this.$store.dispatch('searchAction');
+      this.$store.dispatch('search');
     },
   },
 };

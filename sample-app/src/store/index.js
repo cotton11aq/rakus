@@ -58,7 +58,10 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    searchAction(context) {
+    updateMessage(context, value) {
+      context.commit('updateMessage', value);
+    },
+    search(context) {
       context.commit('search');
     },
   },
