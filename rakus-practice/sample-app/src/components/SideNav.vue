@@ -37,8 +37,8 @@ export default {
       // drawer: false,
       // items: [{ title: '連絡先一覧', icon: 'mdi-menu' }],
       items: [
-        { title: 'ホーム', icon: 'mdi-home', link: { name: 'home' } },
-        { title: '連絡先一覧', icon: 'mdi-menu', link: { name: 'addresses' } },
+        { title: 'ホーム', icon: 'mdi-home', link: { name: 'Home' } },
+        { title: '連絡先一覧', icon: 'mdi-menu', link: { name: 'Addresses' } },
       ],
     };
   },
