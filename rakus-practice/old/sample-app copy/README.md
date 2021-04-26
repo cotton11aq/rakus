@@ -1,4 +1,4 @@
-# sample-app
+# samaple-app
 
 ## Project setup
 ```
