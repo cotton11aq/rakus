@@ -31,11 +31,12 @@ const routes = [
   // },
   {
     path: '/Addresses/:address_id?/edit',
-    name: 'address_edit',
+    name: 'Address_edit',
     component: AddressForm,
 
     // 上だとエラーになる！！なんでかは分からない
     // なぜなら、importしていなかったから！！
+    // link to後のnameと上のnameは同じにする！！
 
     // component: () =>
     //   import(/* webpackChunkName: "about" */ '../views/AddressForm.vue'),

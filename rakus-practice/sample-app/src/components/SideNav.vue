@@ -1,14 +1,14 @@
 <template>
   <div fluid fill-height>
-    <v-btn color="pink" dark @click.stop="drawer = !drawer">Toggle</v-btn>
+    <!-- <v-btn color="pink" dark @click.stop="drawer = !drawer">Toggle</v-btn> -->
     <v-navigation-drawer v-model="$store.state.drawer" absolute temporary>
       <v-list>
         <v-list-item>
           <v-list-item-avatar>
-            <img src="https://picsum.photos/200" alt="" />
+            <img v-if="photoURL" src="https://picsum.photos/200" alt="" />
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title>鈴木アキ</v-list-item-title>
+            <v-list-item-title>{{ userName }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-// import { mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -45,5 +45,8 @@ export default {
   // methods: {
   //   ...mapActions(['toggleSideMenu']),
   // },
+  computed: {
+    ...mapGetters(['userName', 'photoURL']),
+  },
 };
 </script>

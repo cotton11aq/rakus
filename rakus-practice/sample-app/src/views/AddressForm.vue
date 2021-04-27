@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+// import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -47,11 +47,14 @@ export default {
   },
   methods: {
     submit() {
-      this.addAddress(this.address);
-      this.$router.push({ name: 'Addresses' });
-      this.address = {};
+      this.addAddress(this.address); // 1
+      this.$router.push({ name: 'Addresses' }); // 3
+      this.address = {}; // 4
     },
-    ...mapActions(['addAddress']),
+    addAddress() {
+      this.$store.dispatch('addAddress', this.address); // 2 storeが一周されて
+    },
+    // ...mapActions(['addAddress']),mapactionsなら引数が省略できる！
   },
 };
 </script>
