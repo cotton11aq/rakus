@@ -47,6 +47,17 @@ export default new Vuex.Store({
     addAddress({ commit }, address) {
       commit('addAddress', address);
     },
+    fetchAddresses({ getters, commit }) {
+      firebase,
+        firestore()
+          .collection('users/${getters.uid}/addresses')
+          .get()
+          .then((snapshot) => {
+            snapshot.forEach((doc) =>
+              commit('addAddress', { id: doc.id, address: doc.data() })
+            );
+          });
+    },
   },
   getters: {
     userName: (state) => (state.login_user ? state.login_user.displayName : ''),
