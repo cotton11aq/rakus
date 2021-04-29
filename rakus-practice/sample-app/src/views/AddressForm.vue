@@ -37,9 +37,21 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 // import { mapActions } from 'vuex';
 
 export default {
+  created() {
+    const address = this.$store.getters.getAddressById(
+      this.$route.params.address_id //
+    );
+    if (address) {
+      this.address = address;
+    }
+    // this.$store.getters.hoge();
+    // const hoge = this.$store.getters.getAddressById();
+    // console.log(hoge);
+  },
   data() {
     return {
       address: {},
@@ -47,13 +59,29 @@ export default {
   },
   methods: {
     submit() {
-      this.addAddress(this.address); // 1
-      this.$router.push({ name: 'Addresses' }); // 3
-      this.address = {}; // 4
+      if (this.$route.params.address_id) {
+        this.updateAddress({
+          id: this.$route.params.address_id,
+          address: this.address,
+        });
+        console.log(this.$route.params.address_id);
+      } else {
+        this.addAddress(this.address);
+      }
+      this.$router.push({ name: 'Addresses' });
+      this.address = {};
+      // console.log(this.address);
+      // this.$router.push({ name: 'Addresses' });
+      // this.address = {};
+      // console.log(this.address);
+      // this.addAddress(this.address); // 1
+      // this.$router.push({ name: 'Addresses' }); // 3
+      // this.address = {}; // 4
     },
-    addAddress() {
-      this.$store.dispatch('addAddress', this.address); // 2 storeが一周されて
-    },
+    ...mapActions(['addAddress', 'updateAddress']),
+    // addAddress() {
+    //   this.$store.dispatch('addAddress', this.address); // 2 storeが一周されて
+    // },
     // ...mapActions(['addAddress']),mapactionsなら引数が省略できる！
   },
 };

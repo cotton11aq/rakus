@@ -14,12 +14,21 @@
       </v-flex>
       <v-flex x12 mt-5 justify-center>
         <v-data-table :headers="headers" :items="addresses">
-          <!-- <template v-slot:items="props">
-            <td class="text-xs-left">{{ props.item.name }}</td>
+          <template v-slot:[`item.action`]="{ item }">
+            <router-link
+              :to="{ name: 'Address_edit', params: { address_id: item.id } }"
+            >
+              <!-- address_idはここで取得してurlに映し出す -->
+              <v-icon small class="mr-2">mdi-pencil</v-icon>
+            </router-link>
+            <v-icon small class="mr-2" @click="deleteConfirm(item.id)"
+              >mdi-delete</v-icon
+            >
+            <!-- <td class="text-xs-left">{{ props.item.name }}</td>
             <td class="text-xs-left">{{ props.item.tel }}</td>
             <td class="text-xs-left">{{ props.item.email }}</td>
-            <td class="text-xs-left">{{ props.item.address }}</td>
-          </template> -->
+            <td class="text-xs-left">{{ props.item.address }}</td> -->
+          </template>
         </v-data-table>
       </v-flex>
     </v-layout>
@@ -27,6 +36,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   data() {
     return {
@@ -35,6 +46,7 @@ export default {
         { text: '電話番号', value: 'tel' },
         { text: 'メールアドレス', value: 'email' },
         { text: '住所', value: 'address' },
+        { text: '操作', value: 'action' },
       ],
       addresses: [
         // {
@@ -54,6 +66,16 @@ export default {
   },
   created() {
     this.addresses = this.$store.state.addresses;
+  },
+  methods: {
+    deleteConfirm(id) {
+      if (confirm('削除してよろしいですか？')) {
+        this.deleteAddress({ id });
+      }
+    },
+    ...mapActions(['deleteAddress']),
+    // mapActoinsはmethodsの中に書くこと！
+    // methodsの外に書いていたからずっと発動しなかった。
   },
 };
 </script>
