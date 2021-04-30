@@ -1,55 +1,93 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
+    <v-app-bar fixed color="white" brack>
+      <v-app-bar-nav-icon @click="toggleSideMenu"></v-app-bar-nav-icon>
+      <v-toolbar-title @click="redirectHomeRoot">Rakusten</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-text-field
+        v-model="getText"
+        @keydown.enter="
+          search();
+          redirectHomeRoot();
+        "
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+      <v-spacer></v-spacer>
+      <v-btn icon>
+        <v-icon>mdi-account</v-icon>
+      </v-btn>
+      <v-btn icon>
+        <v-icon @click="redirectFavoRoot">mdi-heart</v-icon>
+      </v-btn>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+      <v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
     </v-app-bar>
-
-    <v-main>
-      <router-view/>
+    <Navigation />
+    <v-main fluid fill-height align-start>
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-
+import Navigation from './components/Navigation.vue';
+import { mapActions } from 'vuex';
 export default {
   name: 'App',
-
+  components: {
+    Navigation,
+  },
   data: () => ({
-    //
+    text: '',
   }),
+  methods: {
+    redirectHomeRoot() {
+      if (this.$route.path !== '/') {
+        this.$router.push({ path: '/' });
+      }
+    },
+    redirectFavoRoot() {
+      if (this.$route.path !== '/favorite') {
+        this.$router.push({ path: '/favorite' });
+      }
+    },
+    ...mapActions(['toggleSideMenu', 'search']),
+  },
+  computed: {
+    getText: {
+      get() {
+        // 値の取得
+        return this.$store.state.text;
+      },
+      set(value) {
+        // 値の変更
+        this.$store.dispatch('updateMessage', value);
+      },
+    },
+  },
 };
 </script>
+
+<style>
+.v-main {
+  height: 100vh;
+}
+.v-toolbar__title {
+  cursor: pointer;
+  padding-left: 0 !important;
+  margin-left: 20px;
+}
+
+.v-main__wrap {
+  padding-top: 100px;
+}
+
+.v-application--wrap {
+  min-height: auto !important;
+}
+</style>
