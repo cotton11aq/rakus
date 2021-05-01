@@ -19,10 +19,12 @@
       <v-btn icon>
         <v-icon>mdi-account</v-icon>
       </v-btn>
-      <v-btn icon>
-        <v-icon @click="redirectFavoRoot">mdi-heart</v-icon>
+      <v-btn icon @click="redirectFavoRoot">
+        <v-icon>mdi-heart</v-icon>
       </v-btn>
-
+      <v-btn icon @click="redirectCartRoot">
+        <v-icon>mdi-cart</v-icon>
+      </v-btn>
       <v-btn icon>
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
@@ -54,6 +56,11 @@ export default {
     redirectFavoRoot() {
       if (this.$route.path !== '/favorite') {
         this.$router.push({ path: '/favorite' });
+      }
+    },
+    redirectCartRoot() {
+      if (this.$route.path !== '/cart') {
+        this.$router.push({ path: '/cart' });
       }
     },
     ...mapActions(['toggleSideMenu', 'search']),

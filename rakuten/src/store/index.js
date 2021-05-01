@@ -11,6 +11,7 @@ export default new Vuex.Store({
     items: [],
     text: '',
     favos: [],
+    carts: [],
   },
   mutations: {
     toggleSideMenu(state) {
@@ -19,19 +20,60 @@ export default new Vuex.Store({
     updateMessage(state, value) {
       state.text = value;
     },
-    addFavo(state, item) {
-      if (state.favos === '') {
+    toggleFavo(state, item) {
+      // for (let i = 0; i < state.items.length; i++) {
+      //   state.items[i].id = i;
+      // }
+      console.log(item);
+      console.log(state.favos);
+      // for (let i = 0; i < state.favos.length; i++) {
+      //   if (state.favos[i].title.indexOf(item.title) === -1) {
+      //     console.log('hoge');
+      //     break;
+      //   }
+      // }
+      if (state.favos.indexOf(item) === -1) {
+        console.log(state.items);
+        item.flag = true;
         state.favos.push(item);
-      } else if (state.favos.indexOf(item) !== -1) {
-        state.favos.push(item);
+        // console.log(state.items);
+        console.log(state.items);
         console.log(state.favos);
+        // console.log(state.favos[0].flag);
+      } else {
+        state.favos.splice(state.favos.indexOf(item), 1);
+        item.flag = false;
+        console.log(item.flag);
+      }
+      // console.log(state.item.flag);
+    },
+    deleteFavo(state, favo) {
+      // if (confirm('削除していいですか？')) {
+      state.favos.splice(state.favos.indexOf(favo), 1);
+      // }
+    },
+    deleteCart(state, cart) {
+      if (confirm('削除していいですか？')) {
+        state.carts.splice(state.carts.indexOf(cart), 1);
+      }
+    },
+    addCart(state, item) {
+      console.log(state);
+      console.log(item);
+      if (state.carts.indexOf(item) === -1) {
+        state.carts.push(item);
+        console.log(state.items);
+        console.log(state.carts);
+      } else {
+        // state.favos.splice(state.favos.indexOf(item), 1);
+        // item.flag = false;
+        // console.log(item.flag);
       }
     },
     search(state, searchItems) {
       state.items = [];
       state.items = searchItems;
-      // console.log(this.$route.path);
-      // console.log(state.items);
+      console.log(state.favos);
     },
   },
   actions: {
@@ -41,8 +83,17 @@ export default new Vuex.Store({
     updateMessage(context, value) {
       context.commit('updateMessage', value);
     },
-    addFavo({ commit }, item) {
-      commit('addFavo', item);
+    toggleFavo({ commit }, item) {
+      commit('toggleFavo', item);
+    },
+    deleteFavo({ commit }, favo) {
+      commit('deleteFavo', favo);
+    },
+    deleteCart({ commit }, cart) {
+      commit('deleteCart', cart);
+    },
+    addCart({ commit }, item) {
+      commit('addCart', item);
     },
     async search({ commit }) {
       const url =
@@ -84,13 +135,15 @@ export default new Vuex.Store({
       // console.log(searchItems);
     },
   },
-
   getters: {
     getItems(state) {
       return state.items;
     },
     getFavos(state) {
       return state.favos;
+    },
+    getCarts(state) {
+      return state.carts;
     },
   },
 });

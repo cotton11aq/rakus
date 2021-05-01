@@ -20,6 +20,11 @@ const routes = [
     name: 'Favorite',
     component: () => import('../views/Favorite.vue'),
   },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: () => import('../views/Cart.vue'),
+  },
 ];
 
 const router = new VueRouter({

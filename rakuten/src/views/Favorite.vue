@@ -1,6 +1,7 @@
 <template>
   <!-- v-appのなかに書かないと謎の余白ができてしまう -->
   <v-app>
+    <h2>お気に入りリスト</h2>
     <v-card
       class="mx-auto"
       max-width="344"
@@ -23,11 +24,18 @@
       </v-list-item>
 
       <v-card-actions>
-        <v-btn class="ma-2" tile outlined color="success">
+        <!-- <v-btn class="ma-2" tile outlined color="success">
           <v-icon left>mdi-pencil</v-icon> Edit
-        </v-btn>
-        <v-btn class="ma-2" tile outlined color="error">
-          <v-icon small class="mr-2">mdi-delete</v-icon> Delete
+        </v-btn> -->
+        <v-btn
+          class="ma-2"
+          tile
+          outlined
+          color="error"
+          @click="deleteFavo(favo)"
+        >
+          <v-icon small class="mr-2">mdi-delete</v-icon>
+          Delete
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -35,40 +43,26 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 // import HelloWorld from '../components/HelloWorld'
 
 export default {
   name: 'Favorite',
+  components: {},
   data() {
-    return {
-      headers: [
-        {
-          img: 'https://picsum.photos/200',
-          title: 'JavaScriptの教科書',
-          price: '5,000円',
-        },
-        {
-          img: 'https://picsum.photos/200',
-          title: 'JavaScriptの教科書',
-          price: '5,000円',
-        },
-        {
-          img: 'https://picsum.photos/200',
-          title: 'JavaScriptの教科書',
-          price: '5,000円',
-        },
-      ],
-    };
+    return {};
+  },
+  methods: {
+    ...mapActions(['deleteFavo']),
   },
   computed: {
     ...mapGetters(['getItems', 'getFavos']),
   },
-
-  components: {
-    // HelloWorld,
-  },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+  h2 {
+    text-align: center;
+  }
+</style>

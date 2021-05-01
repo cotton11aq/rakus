@@ -19,11 +19,19 @@
             </v-btn>
             <!-- <v-btn text color="deep-purple accent-4"> Bookmark </v-btn> -->
             <v-spacer></v-spacer>
-            <v-btn icon @click="addFavo(item)">
-              <v-icon>mdi-heart</v-icon>
+            <v-btn icon @click="toggleFavo(item)">
+              <v-icon
+                :class="{
+                  addFavo:
+                    $store.state.favos.indexOf(item) === -1 ? false : true,
+                }"
+                >mdi-heart</v-icon
+              >
+              <!-- ここのindexは、itemsのindexであって、favosのindexではない！ -->
+              <!-- <v-icon class="addFavo">mdi-heart</v-icon> -->
             </v-btn>
             <v-btn icon>
-              <v-icon>mdi-share-variant</v-icon>
+              <v-icon @click="addCart(item)">mdi-cart</v-icon>
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -43,10 +51,10 @@ export default {
     // HelloWorld,
   },
   computed: {
-    ...mapGetters(['getItems']),
+    ...mapGetters(['getItems'], ['getFavos']),
   },
   methods: {
-    ...mapActions(['addFavo']),
+    ...mapActions(['toggleFavo', 'addCart']),
   },
 };
 </script>
@@ -61,5 +69,9 @@ ul {
 
 li {
   padding: 20px;
+}
+
+.addFavo {
+  color: red !important;
 }
 </style>
