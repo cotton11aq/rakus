@@ -112,7 +112,7 @@ export default new Vuex.Store({
           let searchItem = {
             img: element.Item.largeImageUrl,
             title: element.Item.title,
-            price: element.Item.title,
+            price: element.Item.itemPrice,
             url: element.Item.itemUrl,
           };
           // searchItem.img = element.Item.largeImageUrl;

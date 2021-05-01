@@ -9,7 +9,7 @@
               <v-list-item-title class="headline">
                 {{ item.title }}</v-list-item-title
               >
-              <v-list-item-subtitle>{{ item.price }}円</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ item.price.toLocaleString() }}円</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <v-img :src="item.img" height="194"></v-img>

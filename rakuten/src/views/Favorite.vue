@@ -15,7 +15,7 @@
           <v-list-item-title class="headline mb-1">{{
             favo.title
           }}</v-list-item-title>
-          <v-list-item-subtitle>{{ favo.price }}</v-list-item-subtitle>
+          <v-list-item-subtitle>{{ favo.price.toLocaleString() }}</v-list-item-subtitle>
         </v-list-item-content>
 
         <v-list-item-avatar tile size="80"
