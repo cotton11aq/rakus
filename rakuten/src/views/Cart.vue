@@ -15,7 +15,9 @@
           <v-list-item-title class="headline mb-1">{{
             cart.title
           }}</v-list-item-title>
-          <v-list-item-subtitle>{{ cart.price }}</v-list-item-subtitle>
+          <v-list-item-subtitle>{{
+            cart.price.toLocaleString()
+          }}</v-list-item-subtitle>
         </v-list-item-content>
 
         <v-list-item-avatar tile size="80"
@@ -38,7 +40,7 @@
           Delete
         </v-btn>
         <!-- <v-col class="d-flex" cols="12" sm="6"> -->
-          <!-- <v-select
+        <!-- <v-select
             :items="items"
             label="数量"
             item-value="value"
@@ -51,12 +53,12 @@
           
           </v-select> -->
         <!-- </v-col> -->
-          <select name="" id="">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
+        <select name="" id="">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
       </v-card-actions>
     </v-card>
     <div class="count">{{ count }}</div>
