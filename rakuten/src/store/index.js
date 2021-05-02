@@ -12,6 +12,7 @@ export default new Vuex.Store({
     text: '',
     favos: [],
     carts: [],
+    totalPrice: 0,
   },
   mutations: {
     toggleSideMenu(state) {
@@ -55,6 +56,7 @@ export default new Vuex.Store({
     deleteCart(state, cart) {
       if (confirm('削除していいですか？')) {
         state.carts.splice(state.carts.indexOf(cart), 1);
+        state.totalPrice -= JSON.parse(JSON.stringify(cart)).price;
       }
     },
     addCart(state, item) {
@@ -62,14 +64,26 @@ export default new Vuex.Store({
       console.log(item);
       if (state.carts.indexOf(item) === -1) {
         state.carts.push(item);
+        console.log(item);
+        // state.total += ;
         console.log(state.items);
         console.log(state.carts);
+        console.log(state.total);
+        console.log(JSON.parse(JSON.stringify(item)).price);
+        state.totalPrice += JSON.parse(JSON.stringify(item)).price;
+        // JSON.parse(JSON.stringify(state.totalPrice.push(item.price)));
+        console.log(state.totalPrice);
       } else {
         // state.favos.splice(state.favos.indexOf(item), 1);
         // item.flag = false;
         // console.log(item.flag);
       }
     },
+    // onChange(state, val) {
+    //   console.log(state.totalPrice);
+    //   console.log(val);
+    //   console.log(state.totalPrice);
+    // },
     search(state, searchItems) {
       state.items = [];
       state.items = searchItems;
@@ -95,6 +109,9 @@ export default new Vuex.Store({
     addCart({ commit }, item) {
       commit('addCart', item);
     },
+    // onChange({ commit }, val) {
+    //   commit('onChange', val);
+    // },
     async search({ commit }) {
       const url =
         'https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404';
@@ -129,7 +146,7 @@ export default new Vuex.Store({
           // ];
           // actions内でこの状態にしてからmutationsに渡す
         });
-        // console.log(searchItems);
+        console.log(JSON.parse(JSON.stringify(searchItems)));
       });
       await commit('search', searchItems);
       // console.log(searchItems);
@@ -143,7 +160,12 @@ export default new Vuex.Store({
       return state.favos;
     },
     getCarts(state) {
-      return state.carts;
+      console.log(JSON.parse(JSON.stringify(state.carts)));
+      return JSON.parse(JSON.stringify(state.carts));
+    },
+    getTotalPrice(state) {
+      console.log(JSON.parse(JSON.stringify(state.totalPrice)));
+      return JSON.parse(JSON.stringify(state.totalPrice));
     },
   },
 });

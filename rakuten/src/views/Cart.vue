@@ -39,6 +39,7 @@
           <v-icon small class="mr-2">mdi-delete</v-icon>
           Delete
         </v-btn>
+
         <!-- <v-col class="d-flex" cols="12" sm="6"> -->
         <!-- <v-select
             :items="items"
@@ -50,18 +51,18 @@
             v-model="count"
             value
           >
-          
           </v-select> -->
         <!-- </v-col> -->
-        <select name="" id="">
+        <!-- <select name="" id="" v-model="onChange">
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
-        </select>
+        </select> -->
+        <div></div>
       </v-card-actions>
     </v-card>
-    <div class="count">{{ count }}</div>
+    {{ getTotalPrice.toLocaleString() }}
   </v-app>
 </template>
 
@@ -74,25 +75,33 @@ export default {
   components: {},
   data() {
     return {
-      init: { label: 1, value: 1 },
-      // items: [1, 2, 3, 4],
-      items: [
-        { label: 1, value: 1 },
-        { label: 2, value: 2 },
-        { label: 3, value: 3 },
-        { label: 4, value: 4 },
-      ],
-      count: '',
+      // init: { label: 1, value: 1 },
+      // // items: [1, 2, 3, 4],
+      // items: [
+      //   { label: 1, value: 1 },
+      //   { label: 2, value: 2 },
+      //   { label: 3, value: 3 },
+      //   { label: 4, value: 4 },
+      // ],
+      // count: '',
     };
   },
   methods: {
-    addCount(value) {
-      console.log(value);
-    },
-    ...mapActions(['deleteFavo', 'deleteCart']),
+    // onChange(val) {
+    //   console.log(val.target.value);
+    // },
+    ...mapActions(['deleteFavo', 'deleteCart', 'onChange']),
   },
   computed: {
-    ...mapGetters(['getItems', 'getFavos', 'getCarts']),
+    // onChange: {
+    //   get() {
+    //     return this.$store.state.onChange;
+    //   },
+    //   set(val) {
+    //     this.$store.dispatch('onChange', val);
+    //   },
+    // },
+    ...mapGetters(['getItems', 'getFavos', 'getCarts', 'getTotalPrice']),
   },
 };
 </script>
@@ -103,5 +112,10 @@ h2 {
 }
 .count {
   text-align: center;
+}
+
+select {
+  width: 100px;
+  border: 1px solid #000;
 }
 </style>

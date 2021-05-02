@@ -9,7 +9,9 @@
               <v-list-item-title class="headline">
                 {{ item.title }}</v-list-item-title
               >
-              <v-list-item-subtitle>{{ item.price.toLocaleString() }}円</v-list-item-subtitle>
+              <v-list-item-subtitle
+                >{{ item.price.toLocaleString() }}円</v-list-item-subtitle
+              >
             </v-list-item-content>
           </v-list-item>
           <v-img :src="item.img" height="194"></v-img>
@@ -30,8 +32,8 @@
               <!-- ここのindexは、itemsのindexであって、favosのindexではない！ -->
               <!-- <v-icon class="addFavo">mdi-heart</v-icon> -->
             </v-btn>
-            <v-btn icon>
-              <v-icon @click="addCart(item)">mdi-cart</v-icon>
+            <v-btn icon @click="addCart(item)">
+              <v-icon>mdi-cart</v-icon>
             </v-btn>
           </v-card-actions>
         </v-card>
