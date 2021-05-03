@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import firebase from 'firebase';
 
 Vue.use(Vuex, VueAxios, axios);
 
@@ -13,6 +14,8 @@ export default new Vuex.Store({
     favos: [],
     carts: [],
     totalPrice: 0,
+    login_user: null,
+    
   },
   mutations: {
     toggleSideMenu(state) {
@@ -89,6 +92,14 @@ export default new Vuex.Store({
       state.items = searchItems;
       console.log(state.favos);
     },
+    setLoginUser(state, user) {
+      state.login_user = user;
+      console.log(state.login_user);
+      console.log(state.login_user.photoURL);
+    },
+    deleteLoginUser(state) {
+      state.login_user = null;
+    },
   },
   actions: {
     toggleSideMenu({ commit }) {
@@ -105,6 +116,9 @@ export default new Vuex.Store({
     },
     deleteCart({ commit }, cart) {
       commit('deleteCart', cart);
+    },
+    setLoginUser({ commit }, user) {
+      commit('setLoginUser', user);
     },
     addCart({ commit }, item) {
       commit('addCart', item);
@@ -151,6 +165,16 @@ export default new Vuex.Store({
       await commit('search', searchItems);
       // console.log(searchItems);
     },
+    login() {
+      const google_auth_provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithRedirect(google_auth_provider);
+    },
+    logout() {
+      firebase.auth().signOut();
+    },
+    deleteLoginUser({ commit }) {
+      commit('deleteLoginUser');
+    },
   },
   getters: {
     getItems(state) {
@@ -167,5 +191,7 @@ export default new Vuex.Store({
       console.log(JSON.parse(JSON.stringify(state.totalPrice)));
       return JSON.parse(JSON.stringify(state.totalPrice));
     },
+    userName: (state) => (state.login_user ? state.login_user.displayName : ''),
+    photoURL: (state) => (state.login_user ? state.login_user.photoURL : ''),
   },
 });

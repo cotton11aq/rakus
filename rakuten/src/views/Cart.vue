@@ -17,7 +17,7 @@
           }}</v-list-item-title>
           <v-list-item-subtitle>{{
             cart.price.toLocaleString()
-          }}</v-list-item-subtitle>
+          }}円</v-list-item-subtitle>
         </v-list-item-content>
 
         <v-list-item-avatar tile size="80"
@@ -62,7 +62,7 @@
         <div></div>
       </v-card-actions>
     </v-card>
-    {{ getTotalPrice.toLocaleString() }}
+    {{ getTotalPrice.toLocaleString() }}円
   </v-app>
 </template>
 

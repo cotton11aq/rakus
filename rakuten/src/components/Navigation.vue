@@ -3,11 +3,11 @@
     <v-navigation-drawer v-model="$store.state.drawer" absolute temporary>
       <v-list-item>
         <v-list-item-avatar>
-          <v-img src="https://picsum.photos/200"></v-img>
+          <v-img :src="photoURL"></v-img>
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>John Leider</v-list-item-title>
+          <v-list-item-title>{{ userName }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: 'Navigation',
 
@@ -46,5 +47,8 @@ export default {
       { title: 'お気に入り', icon: 'mdi-heart', link: { name: 'Favorite' } },
     ],
   }),
+  computed: {
+    ...mapGetters(['userName', 'photoURL']),
+  },
 };
 </script>

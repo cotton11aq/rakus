@@ -16,7 +16,8 @@
         hide-details
       ></v-text-field>
       <v-spacer></v-spacer>
-      <v-btn icon>
+      <v-btn v-if="$store.state.login_user" @click="logout"> ログアウト </v-btn>
+      <v-btn icon @click="login">
         <v-icon>mdi-account</v-icon>
       </v-btn>
       <v-btn icon @click="redirectFavoRoot">
@@ -39,10 +40,25 @@
 <script>
 import Navigation from './components/Navigation.vue';
 import { mapActions } from 'vuex';
+import firebase from 'firebase';
+
 export default {
   name: 'App',
   components: {
     Navigation,
+  },
+  created() {
+    // firebase.auth().onAuthStateChanged(function (user) {
+    // アロー関数じゃないとエラーになる！なんで！
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in.
+        this.setLoginUser(user);
+      } else {
+        // No user is signed in.
+        this.deleteLoginUser();
+      }
+    });
   },
   data: () => ({
     text: '',
@@ -63,7 +79,14 @@ export default {
         this.$router.push({ path: '/cart' });
       }
     },
-    ...mapActions(['toggleSideMenu', 'search']),
+    ...mapActions([
+      'toggleSideMenu',
+      'search',
+      'login',
+      'setLoginUser',
+      'deleteLoginUser',
+      'logout',
+    ]),
   },
   computed: {
     getText: {
