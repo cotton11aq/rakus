@@ -20,12 +20,17 @@
       <v-btn icon @click="login">
         <v-icon>mdi-account</v-icon>
       </v-btn>
-      <v-btn icon @click="redirectFavoRoot">
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-      <v-btn icon @click="redirectCartRoot">
-        <v-icon>mdi-cart</v-icon>
-      </v-btn>
+      <!-- <v-btn icon @click="redirectFavoRoot"> -->
+      <router-link :to="{ name: 'Favorite', params: { user_id: uid } }">
+        <v-btn icon>
+          <v-icon>mdi-heart</v-icon>
+        </v-btn>
+      </router-link>
+      <router-link :to="{ name: 'Cart', params: { user_id: uid } }">
+        <v-btn icon @click="redirectCartRoot">
+          <v-icon>mdi-cart</v-icon>
+        </v-btn>
+      </router-link>
       <v-btn icon>
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
@@ -54,14 +59,27 @@ export default {
       if (user) {
         // User is signed in.
         this.setLoginUser(user);
+        this.fetchCarts();
       } else {
         // No user is signed in.
         this.deleteLoginUser();
       }
     });
+    if (this.$store.getters.uid) {
+      this.uid = this.$store.getters.uid;
+    }
+    // const item = this.$store.getters.getCartById(this.$route.params.cart_id);
+    // if (item) {
+    //   this.item = item;
+    //   console.log(item);
+    // } else {
+    //   console.log('hoge');
+    // }
   },
   data: () => ({
     text: '',
+    item: {},
+    uid: {},
   }),
   methods: {
     redirectHomeRoot() {
@@ -75,8 +93,8 @@ export default {
       }
     },
     redirectCartRoot() {
-      if (this.$route.path !== '/cart') {
-        this.$router.push({ path: '/cart' });
+      if (this.$route.path !== '/:cart_id?/cart') {
+        this.$router.push({ path: '/:cart_id?/cart' });
       }
     },
     ...mapActions([
@@ -85,6 +103,7 @@ export default {
       'login',
       'setLoginUser',
       'deleteLoginUser',
+      'fetchCarts',
       'logout',
     ]),
   },

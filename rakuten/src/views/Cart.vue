@@ -2,26 +2,27 @@
   <!-- v-appのなかに書かないと謎の余白ができてしまう -->
   <v-app>
     <h2>ショッピングカート</h2>
+
     <v-card
       class="mx-auto"
       max-width="344"
       outlined
-      v-for="(cart, index) in getCarts"
+      v-for="(cart, index) in carts"
       :key="index"
     >
       <v-list-item three-line>
         <v-list-item-content>
           <div class="overline mb-4">OVERLINE</div>
           <v-list-item-title class="headline mb-1">{{
-            cart.title
+            cart.item.title
           }}</v-list-item-title>
-          <v-list-item-subtitle>{{
-            cart.price.toLocaleString()
-          }}円</v-list-item-subtitle>
+          <v-list-item-subtitle
+            >{{ cart.item.price.toLocaleString() }}円</v-list-item-subtitle
+          >
         </v-list-item-content>
 
         <v-list-item-avatar tile size="80"
-          ><img :src="cart.img" alt=""
+          ><img :src="cart.item.img" alt=""
         /></v-list-item-avatar>
       </v-list-item>
 
@@ -34,7 +35,7 @@
           tile
           outlined
           color="error"
-          @click="deleteCart(cart)"
+          @click="deleteCartItem(cart.id)"
         >
           <v-icon small class="mr-2">mdi-delete</v-icon>
           Delete
@@ -62,7 +63,8 @@
         <div></div>
       </v-card-actions>
     </v-card>
-    {{ getTotalPrice.toLocaleString() }}円
+    {{ totalPrice.toLocaleString() }}円
+    <v-btn @click="shop(carts)">レジへ進む</v-btn>
   </v-app>
 </template>
 
@@ -73,8 +75,17 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'Favorite',
   components: {},
+  created() {
+    // console.log(JSON.parse(JSON.stringify(this.$store.state.carts)));
+    setTimeout(() => {
+      this.carts = JSON.parse(JSON.stringify(this.$store.state.carts));
+      // console.log(this.carts);
+      this.totalPrice = this.$store.state.totalPrice;
+    }, 1000);
+  },
   data() {
     return {
+      carts: [],
       // init: { label: 1, value: 1 },
       // // items: [1, 2, 3, 4],
       // items: [
@@ -84,13 +95,19 @@ export default {
       //   { label: 4, value: 4 },
       // ],
       // count: '',
+      totalPrice: '',
     };
   },
   methods: {
     // onChange(val) {
     //   console.log(val.target.value);
     // },
-    ...mapActions(['deleteFavo', 'deleteCart', 'onChange']),
+    deleteCartItem(id) {
+      if (confirm('削除してよろしいですか？')) {
+        this.deleteCart(id);
+      }
+    },
+    ...mapActions(['deleteFavo', 'deleteCart', 'onChange', 'shop']),
   },
   computed: {
     // onChange: {
@@ -101,7 +118,9 @@ export default {
     //     this.$store.dispatch('onChange', val);
     //   },
     // },
-    ...mapGetters(['getItems', 'getFavos', 'getCarts', 'getTotalPrice']),
+    ...mapGetters(['getItems', 'getFavos', 'getTotalPrice']),
+    // ...mapGetters(['getItems', 'getFavos', 'getCarts', 'getTotalPrice']),
+    // getCartsは削除。data内でcart情報を保持したいから、storeから参照する。
   },
 };
 </script>

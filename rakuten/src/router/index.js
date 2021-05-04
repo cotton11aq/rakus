@@ -16,14 +16,19 @@ const routes = [
     component: () => import('../views/Login.vue'),
   },
   {
-    path: '/favorite',
+    path: '/:user_id?/favorite',
     name: 'Favorite',
     component: () => import('../views/Favorite.vue'),
   },
   {
-    path: '/cart',
+    path: '/:user_id?/cart',
     name: 'Cart',
     component: () => import('../views/Cart.vue'),
+  },
+  {
+    path: '/detail/:id',
+    name: 'Detail',
+    component: () => import('../views/Detail.vue'),
   },
 ];
 
