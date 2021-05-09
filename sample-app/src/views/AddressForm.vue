@@ -70,6 +70,7 @@ export default {
       }
       this.$router.push({ name: 'Addresses' });
       this.address = {};
+
       // console.log(this.address);
       // this.$router.push({ name: 'Addresses' });
       // this.address = {};
